@@ -1,0 +1,61 @@
+name: Django CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+
+      - name: Clone botland
+        run: |
+          git clone https://github.com/youzarsiph/botland
+          
+      - name: Install Dependencies
+        run: |
+          cp botland/pyproject.toml .
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+          python -m poetry shell
+          python -m poetry install
+
+      - name: Create Django Project
+        run: |
+          python -m poetry shell
+          python -m django startproject mysite
+          cp -r botland mysite/botland
+
+      - name: Add botland to INSTALLED_APPS
+        run: |
+          cd mysite
+          echo "INSTALLED_APPS += ['botland', 'botland.bots', 'botland.chats', 'botland.messages', 'rest_framework']" >> mysite/settings.py
+          echo "AUTH_USER_MODEL = 'users.User'" >> mysite/settings.py
+
+      - name: Add blog to mysite URLConf
+        run: |
+          cd mysite
+          echo "from django.urls import include" >> mysite/urls.py
+          echo "urlpatterns += [path('', include('botland.urls'))]" >> mysite/urls.py
+
+      - name: Run Migrations
+        run: |
+          cd mysite
+          python manage.py migrate
+
+      - name: Run Check
+        run: |
+          cd mysite
+          python manage.py check
+
+      - name: Run Tests
+        run: |
+          cd mysite
+          python manage.py test

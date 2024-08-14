@@ -1,0 +1,30 @@
+[tool.poetry]
+package-mode = false
+name = "botland"
+version = "0.1.0"
+description = "BotLand: Chatbot land, Chat API with HuggingFace chat LLMs built with Python and Django."
+authors = ["Yousef Abu Shanab <josephyousef249@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/youzarsiph/botland"
+repository = "https://github.com/youzarsiph/botland"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+channels = "^4.1.0"
+Django = "^5.1"
+django-cors-headers = "^4.4.0"
+django-filter = "^24.3"
+djangorestframework = "^3.15.2"
+drf-redesign = "^0.4.0"
+pillow = "^10.4.0"
+python-dotenv = "^1.0.1"
+huggingface-hub = "^0.24.5"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+ruff = "^0.5.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
