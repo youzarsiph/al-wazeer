@@ -12,5 +12,23 @@ class ChatSerializer(ModelSerializer):
         """Meta data"""
 
         model = Chat
-        fields = ()
-        read_only_fields = ()
+        read_only_fields = ("user",)
+        fields = (
+            "id",
+            "url",
+            "user",
+            "bot",
+            "title",
+            "is_pinned",
+            "created_at",
+            "updated_at",
+        )
+
+
+class ChatRetrieveSerializer(ChatSerializer):
+    """Serialize chats in retrieve action"""
+
+    class Meta(ChatSerializer.Meta):
+        """Meta data"""
+
+        read_only_fields = ("user", "bot")

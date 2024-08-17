@@ -7,4 +7,29 @@ from django.db import models
 class Bot(models.Model):
     """BotLand Bots"""
 
-    pass
+    name = models.CharField(
+        max_length=128,
+        db_index=True,
+        help_text="Bot (Chat LLM) name",
+    )
+    slug = models.CharField(
+        max_length=128,
+        unique=True,
+        db_index=True,
+        help_text="Bot slug like microsoft/Phi-3-4k-mini",
+    )
+    description = models.CharField(
+        max_length=512,
+        help_text="Bot description",
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="Creation date and time",
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        help_text="Last update date and time",
+    )
+
+    def __str__(self) -> str:
+        return self.name

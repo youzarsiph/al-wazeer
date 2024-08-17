@@ -12,5 +12,12 @@ class BotSerializer(ModelSerializer):
         """Meta data"""
 
         model = Bot
-        fields = ()
-        read_only_fields = ()
+        fields = (
+            "id",
+            "url",
+            "name",
+            "slug",
+            "description",
+            "created_at",
+            "updated_at",
+        )

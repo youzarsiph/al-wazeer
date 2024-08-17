@@ -12,5 +12,16 @@ class MessageSerializer(ModelSerializer):
         """Meta data"""
 
         model = Message
-        fields = ()
-        read_only_fields = ()
+        read_only_fields = ("user", "bot", "chat")
+        fields = (
+            "id",
+            "url",
+            "user",
+            "bot",
+            "chat",
+            "content",
+            "is_starred",
+            "is_edited",
+            "created_at",
+            "updated_at",
+        )
