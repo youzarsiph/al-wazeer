@@ -21,14 +21,22 @@ class AsyncMessageConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self) -> None:
         """Connect"""
 
+        # Check is the user is authenticated
+        if not self.scope["user"].is_authenticated:
+            await self.disconnect(code=401)
+
         # Chat
         self.chat = await self.get_chat()
+
+        # Check is the user is authenticated
+        if not self.scope["user"].id == self.chat.user_id:
+            await self.disconnect(code=403)
 
         # Chatbot
         self.bot = await self.get_bot()
 
-        if not self.scope["user"].is_authenticated:
-            await self.disconnect(code=401)
+        # Chat history
+        self.history = await self.get_chat_history()
 
         # Accept connection
         await self.accept()
@@ -42,16 +50,18 @@ class AsyncMessageConsumer(AsyncJsonWebsocketConsumer):
         """Receive data"""
 
         # User's message
-        print("Creating user message")
-        await self.create_message(content=content["content"], user=self.scope["user"])
+        message = await self.create_message(
+            content=content["content"],
+            user=self.scope["user"],
+        )
 
-        # Chat history
-        history = await self.get_chat_history()
+        # Add to chat history
+        self.history.append({"role": "user", "content": message.content})
 
         # Bot's response
         response = await self.client.chat_completion(
             model=self.bot.slug,
-            messages=history,
+            messages=self.history,
             stream=False,
         )
 
@@ -66,6 +76,9 @@ class AsyncMessageConsumer(AsyncJsonWebsocketConsumer):
             bot_message = await self.create_message(
                 content=serializer.validated_data.get("content")
             )
+
+            # Add to chat history
+            self.history.append({"role": "assistant", "content": bot_message.content})
 
             serializer = MessageSerializer(
                 instance=bot_message,

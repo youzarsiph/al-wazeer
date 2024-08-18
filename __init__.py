@@ -1,4 +1,4 @@
-""" BotLand: Chatbot land, Chat API with HuggingFace chat LLMs built with Python and Django. """
+""" BotLand: Land of chat bots, Chat API with HuggingFace chat LLMs built with Python and Django. """
 
 from dotenv import load_dotenv
 

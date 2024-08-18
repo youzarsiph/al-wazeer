@@ -41,5 +41,11 @@ class Chat(models.Model):
         help_text="Last update date and time",
     )
 
+    @property
+    def message_count(self) -> int:
+        """Number of a messages of a chat"""
+
+        return self.messages.count()
+
     def __str__(self) -> str:
         return f"{self.user}-{self.bot}: {self.title}"

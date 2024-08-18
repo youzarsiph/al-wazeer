@@ -14,3 +14,9 @@ class User(AbstractUser):
         upload_to="images/users",
         help_text="Profile picture",
     )
+
+    @property
+    def chat_count(self):
+        """Number of chats of a user"""
+
+        return self.chats.count()

@@ -18,6 +18,7 @@ class BotSerializer(ModelSerializer):
             "name",
             "slug",
             "description",
+            "chat_count",
             "created_at",
             "updated_at",
         )

@@ -20,6 +20,7 @@ class ChatSerializer(ModelSerializer):
             "bot",
             "title",
             "is_pinned",
+            "message_count",
             "created_at",
             "updated_at",
         )

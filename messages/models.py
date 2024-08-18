@@ -34,7 +34,7 @@ class Message(models.Model):
         help_text="Chat",
     )
     content = models.CharField(
-        max_length=1024,
+        max_length=4096,
         db_index=True,
         help_text="Message content",
     )

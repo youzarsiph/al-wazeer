@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from botland.chats.models import Chat
 from botland.chats.serializers import ChatRetrieveSerializer, ChatSerializer
 from botland.mixins import OwnerMixin
+from botland.permissions import IsOwner
 
 
 # Create your views here.
@@ -13,7 +14,7 @@ class ChatViewSet(OwnerMixin, ModelViewSet):
 
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwner)
     filterset_fields = ("id", "user", "bot")
     search_fields = ("user", "bot", "title")
     ordering_fields = ("id", "title", "created_at", "updated_at")

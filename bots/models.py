@@ -10,13 +10,13 @@ class Bot(models.Model):
     name = models.CharField(
         max_length=128,
         db_index=True,
-        help_text="Bot (Chat LLM) name",
+        help_text="Bot name (Chat LLM)",
     )
     slug = models.CharField(
         max_length=128,
         unique=True,
         db_index=True,
-        help_text="Bot slug like microsoft/Phi-3-4k-mini",
+        help_text="Can be a model id hosted on the Hugging Face Hub, e.g. `meta-llama/Meta-Llama-3-8B-Instruct` or a URL to a deployed Inference Endpoint.",
     )
     description = models.CharField(
         max_length=512,
@@ -30,6 +30,12 @@ class Bot(models.Model):
         auto_now=True,
         help_text="Last update date and time",
     )
+
+    @property
+    def chat_count(self):
+        """Number of chats of a bot"""
+
+        return self.chats.count()
 
     def __str__(self) -> str:
         return self.name
