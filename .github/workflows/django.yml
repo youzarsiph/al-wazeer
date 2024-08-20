@@ -41,7 +41,6 @@ jobs:
 
       - name: Run Migrations, System checks and test
         run: |
-          python -m poetry shell
           cd mysite
           python manage.py migrate
           python manage.py check
