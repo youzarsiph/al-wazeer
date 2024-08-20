@@ -13,14 +13,14 @@ class BotViewSet(ModelViewSet):
     queryset = Bot.objects.all()
     serializer_class = BotSerializer
     permission_classes = (IsAuthenticated, IsAdminUser)
-    filterset_fields = ("id", "slug")
-    search_fields = ("name", "slug", "description")
+    filterset_fields = ("id", "model")
+    search_fields = ("name", "model", "description")
     ordering_fields = ("id", "name", "created_at", "updated_at")
 
     def get_permissions(self):
         """Allow read only access for users and read/write access to staffs"""
 
-        if self.action in ("list", "update"):
+        if self.action in ("list", "retrieve"):
             self.permission_classes = (IsAuthenticated,)
 
         return super().get_permissions()

@@ -38,6 +38,10 @@ class Message(models.Model):
         db_index=True,
         help_text="Message content",
     )
+    is_read = models.BooleanField(
+        default=False,
+        help_text="Designates if the message is read or viewed by user",
+    )
     is_starred = models.BooleanField(
         default=False,
         help_text="Designates if the message is saved or added to favorites",

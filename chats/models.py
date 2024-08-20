@@ -47,5 +47,11 @@ class Chat(models.Model):
 
         return self.messages.count()
 
+    @property
+    def unread_message_count(self) -> int:
+        """Number of a unread messages of a chat"""
+
+        return self.messages.filter(is_read=False).count()
+
     def __str__(self) -> str:
         return f"{self.user}-{self.bot}: {self.title}"

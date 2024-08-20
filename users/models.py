@@ -14,6 +14,12 @@ class User(AbstractUser):
         upload_to="images/users",
         help_text="Profile picture",
     )
+    bio = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        help_text="User bio",
+    )
 
     @property
     def chat_count(self):

@@ -16,7 +16,7 @@ class BotSerializer(ModelSerializer):
             "id",
             "url",
             "name",
-            "slug",
+            "model",
             "description",
             "chat_count",
             "created_at",

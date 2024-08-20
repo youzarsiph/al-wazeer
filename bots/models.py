@@ -12,7 +12,7 @@ class Bot(models.Model):
         db_index=True,
         help_text="Bot name (Chat LLM)",
     )
-    slug = models.CharField(
+    model = models.CharField(
         max_length=128,
         unique=True,
         db_index=True,

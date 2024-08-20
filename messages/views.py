@@ -3,7 +3,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from botland.messages.models import Message
-from botland.messages.serializers import MessageSerializer
+from botland.messages.serializers import MessageCreateSerializer, MessageSerializer
 from botland.mixins import OwnerMixin
 from botland.permissions import IsOwner
 
@@ -15,20 +15,12 @@ class MessageViewSet(OwnerMixin, ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     permission_classes = (IsAuthenticated, IsOwner)
-    filterset_fields = ("id", "user", "bot", "chat", "is_starred")
     search_fields = ("content",)
     ordering_fields = ("id", "created_at", "updated_at")
+    filterset_fields = ("id", "user", "bot", "chat", "is_starred", "is_read")
 
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update", "delete"]:
+            self.serializer_class = MessageCreateSerializer
 
-class ChatMessagesViewSet(MessageViewSet):
-    """Messages of a chat"""
-
-    def get_queryset(self):
-        """Filter queryset by chat"""
-
-        return super().get_queryset().filter(chat_id=self.kwargs["id"])
-
-    def perform_create(self, serializer):
-        """Saves the message with user and chat"""
-
-        serializer.save(user=self.request.user, chat_id=self.kwargs["id"])
+        return super().get_serializer_class()
