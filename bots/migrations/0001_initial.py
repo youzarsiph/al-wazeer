@@ -7,19 +7,52 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Bot',
+            name="Bot",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, help_text='Bot name (Chat LLM)', max_length=128)),
-                ('model', models.CharField(db_index=True, help_text='Can be a model id hosted on the Hugging Face Hub, e.g. `meta-llama/Meta-Llama-3-8B-Instruct` or a URL to a deployed Inference Endpoint.', max_length=128, unique=True)),
-                ('description', models.CharField(help_text='Bot description', max_length=512)),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Creation date and time')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Last update date and time')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        db_index=True, help_text="Bot name (Chat LLM)", max_length=128
+                    ),
+                ),
+                (
+                    "model",
+                    models.CharField(
+                        db_index=True,
+                        help_text="Can be a model id hosted on the Hugging Face Hub, e.g. `meta-llama/Meta-Llama-3-8B-Instruct` or a URL to a deployed Inference Endpoint.",
+                        max_length=128,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(help_text="Bot description", max_length=512),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, help_text="Creation date and time"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, help_text="Last update date and time"
+                    ),
+                ),
             ],
         ),
     ]

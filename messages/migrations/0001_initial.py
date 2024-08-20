@@ -9,22 +9,75 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('bots', '0001_initial'),
-        ('chats', '0001_initial'),
+        ("bots", "0001_initial"),
+        ("chats", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Message',
+            name="Message",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', models.CharField(db_index=True, help_text='Message content', max_length=4096)),
-                ('is_read', models.BooleanField(default=False, help_text='Designates if the message is read or viewed by user')),
-                ('is_starred', models.BooleanField(default=False, help_text='Designates if the message is saved or added to favorites')),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Creation date and time')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Last update date and time')),
-                ('bot', models.ForeignKey(blank=True, help_text='Bot', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='messages', to='bots.bot')),
-                ('chat', models.ForeignKey(help_text='Chat', on_delete=django.db.models.deletion.CASCADE, related_name='messages', to='chats.chat')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "content",
+                    models.CharField(
+                        db_index=True, help_text="Message content", max_length=4096
+                    ),
+                ),
+                (
+                    "is_read",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates if the message is read or viewed by user",
+                    ),
+                ),
+                (
+                    "is_starred",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates if the message is saved or added to favorites",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, help_text="Creation date and time"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, help_text="Last update date and time"
+                    ),
+                ),
+                (
+                    "bot",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="Bot",
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="messages",
+                        to="bots.bot",
+                    ),
+                ),
+                (
+                    "chat",
+                    models.ForeignKey(
+                        help_text="Chat",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="messages",
+                        to="chats.chat",
+                    ),
+                ),
             ],
         ),
     ]
