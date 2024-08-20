@@ -21,24 +21,19 @@ jobs:
           
       - name: Install Dependencies
         run: |
-          cp botland/pyproject.toml .
+          cp botland/requirements.txt requirements.txt
           python -m pip install --upgrade pip
-          python -m pip install poetry
-          python -m poetry install
+          python -m pip install -r requirements.txt
 
-      - name: Create Django Project
+      - name: Create a Django project and configure settings
         run: |
-          python -m poetry shell
           python -m django startproject mysite
           cp -r botland mysite/botland
-
-      - name: Add botland to INSTALLED_APPS
-        run: |
           cd mysite
           echo "INSTALLED_APPS += ['botland', 'botland.bots', 'botland.chats', 'botland.messages', 'botland.users', 'rest_framework']" >> mysite/settings.py
           echo "AUTH_USER_MODEL = 'users.User'" >> mysite/settings.py
 
-      - name: Add blog to mysite URLConf
+      - name: Configure URLConf
         run: |
           cd mysite
           echo "from django.urls import include" >> mysite/urls.py
