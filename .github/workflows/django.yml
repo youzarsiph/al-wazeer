@@ -24,7 +24,6 @@ jobs:
           cp botland/pyproject.toml .
           python -m pip install --upgrade pip
           python -m pip install poetry
-          python -m poetry shell
           python -m poetry install
 
       - name: Create Django Project
@@ -36,7 +35,7 @@ jobs:
       - name: Add botland to INSTALLED_APPS
         run: |
           cd mysite
-          echo "INSTALLED_APPS += ['botland', 'botland.bots', 'botland.chats', 'botland.messages', 'rest_framework']" >> mysite/settings.py
+          echo "INSTALLED_APPS += ['botland', 'botland.bots', 'botland.chats', 'botland.messages', 'botland.users', 'rest_framework']" >> mysite/settings.py
           echo "AUTH_USER_MODEL = 'users.User'" >> mysite/settings.py
 
       - name: Add blog to mysite URLConf
@@ -45,17 +44,10 @@ jobs:
           echo "from django.urls import include" >> mysite/urls.py
           echo "urlpatterns += [path('', include('botland.urls'))]" >> mysite/urls.py
 
-      - name: Run Migrations
+      - name: Run Migrations, System checks and test
         run: |
+          python -m poetry shell
           cd mysite
           python manage.py migrate
-
-      - name: Run Check
-        run: |
-          cd mysite
           python manage.py check
-
-      - name: Run Tests
-        run: |
-          cd mysite
           python manage.py test
