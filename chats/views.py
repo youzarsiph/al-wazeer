@@ -14,9 +14,9 @@ from botland.permissions import IsOwner
 
 # Create your views here.
 class ChatViewSet(OwnerMixin, ModelViewSet):
-    """Chat ViewSet"""
+    """Create, read, update and delete chats"""
 
-    queryset = Chat.objects.all()
+    queryset = Chat.objects.prefetch_related("bot", "messages")
     serializer_class = ChatSerializer
     permission_classes = (IsAuthenticated, IsOwner)
     filterset_fields = ("id", "user", "bot")
@@ -24,7 +24,7 @@ class ChatViewSet(OwnerMixin, ModelViewSet):
     ordering_fields = ("id", "title", "created_at", "updated_at")
 
     def get_serializer_class(self):
-        if self.action in ["create", "update", "partial_update", "delete"]:
+        if self.action == "create":
             self.serializer_class = ChatCreateSerializer
         elif self.action == "retrieve":
             self.serializer_class = ChatRetrieveSerializer

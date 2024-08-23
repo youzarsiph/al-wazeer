@@ -1,14 +1,14 @@
 """ Consumers for botland.messages """
 
 import json
-from typing import Dict, List
+from typing import Dict, List, Union
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.db import database_sync_to_async
 from huggingface_hub import AsyncInferenceClient
 from botland.bots.models import Bot
 from botland.chats.models import Chat
 from botland.messages.models import Message
-from botland.messages.serializers import MessageSerializer
+from botland.messages.serializers import MessageCreateSerializer
 
 
 # Create your consumers here.
@@ -28,7 +28,7 @@ class AsyncMessageConsumer(AsyncJsonWebsocketConsumer):
         # Chat
         self.chat = await self.get_chat()
 
-        # Check is the user is authenticated
+        # Check is the user is owner of the chat
         if not self.scope["user"].id == self.chat.user_id:
             await self.disconnect(code=403)
 
@@ -41,65 +41,83 @@ class AsyncMessageConsumer(AsyncJsonWebsocketConsumer):
         # Accept connection
         await self.accept()
 
-    async def disconnect(self, code) -> None:
-        """Disconnect"""
+    async def decode_json(self, text_data):
+        """Validate incoming data"""
 
-        await super().disconnect(code)
+        data = json.loads(text_data)
+        data["user"] = self.scope["user"]
+
+        serializer = MessageCreateSerializer(data=data)
+
+        # Data validation
+        if serializer.is_valid(raise_exception=True):
+            return serializer.validated_data
 
     async def receive_json(self, content: Dict, **kwargs) -> None:
         """Receive data"""
 
-        # User's message
+        # User message
         message = await self.create_message(
             content=content["content"],
-            user=self.scope["user"],
+            user=self.scope["user"].id,
         )
 
         # Add to chat history
         self.history.append({"role": "user", "content": message.content})
 
-        # Bot's response
-        response = await self.client.chat_completion(
-            model=self.bot.slug,
-            messages=self.history,
-            stream=False,
+        await self.send_json(
+            {
+                "type": "message.receive",
+                "content": self.serialize(message),
+            }
         )
 
-        # Data validation
-        serializer = MessageSerializer(
-            data={"content": response.choices[0].message.content},
+        # Bot's response
+        response = await self.client.chat_completion(
+            model=self.bot.model,
+            messages=self.history,
+            stream=False,
+            max_tokens=2048,
+        )
+
+        # Bot's message
+        bot_message = await self.create_message(
+            content=response.choices[0].message.content
+        )
+
+        # Add to chat history
+        self.history.append({"role": "assistant", "content": bot_message.content})
+
+        # Return the result
+        await self.send_json(
+            {
+                "type": "message.receive",
+                "content": self.serialize(bot_message),
+            }
+        )
+
+    def serialize(
+        self,
+        message: Message,
+    ) -> Union[Dict[str, str], List[Dict[str, str]]]:
+        """Serialize messages"""
+
+        serializer = MessageCreateSerializer(
             context={"request": self.scope},
+            data={
+                "id": message.pk,
+                "bot": message.bot,
+                "chat": message.chat,
+                "content": message.content,
+                "created_at": message.created_at,
+                "updated_at": message.updated_at,
+            },
         )
 
         if serializer.is_valid():
-            # Bot's message
-            bot_message = await self.create_message(
-                content=serializer.validated_data.get("content")
-            )
-
-            # Add to chat history
-            self.history.append({"role": "assistant", "content": bot_message.content})
-
-            serializer = MessageSerializer(
-                instance=bot_message,
-                data=serializer.validated_data,
-            )
-            serializer.is_valid()
-
-            # Return the result
-            await self.send_json({"message": serializer.validated_data})
-        else:
-            await self.send_json({"message": serializer.errors})
-
-    @classmethod
-    async def decode_json(cls, text_data):
-        """Validate incoming data"""
-
-        serializer = MessageSerializer(data=json.loads(text_data))
-
-        # Data validation
-        if serializer.is_valid(raise_exception=True):
             return serializer.validated_data
+
+        return serializer.errors
 
     @database_sync_to_async
     def create_message(self, content: str, user=None) -> Message:

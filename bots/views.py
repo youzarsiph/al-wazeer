@@ -8,7 +8,7 @@ from botland.bots.serializers import BotSerializer
 
 # Create your views here.
 class BotViewSet(ModelViewSet):
-    """Bot ViewSet"""
+    """Create, read, update and delete Bots (admins only)"""
 
     queryset = Bot.objects.all()
     serializer_class = BotSerializer

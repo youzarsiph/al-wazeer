@@ -8,7 +8,7 @@ from botland.users.serializers import UserSerializer
 
 # Create your views here.
 class UserViewSet(ReadOnlyModelViewSet):
-    """User ViewSet"""
+    """Read only, List and retrieve Users"""
 
     queryset = User.objects.all()
     serializer_class = UserSerializer

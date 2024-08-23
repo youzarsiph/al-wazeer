@@ -2,7 +2,6 @@
 
 from rest_framework.serializers import ModelSerializer
 from botland.messages.models import Message
-from botland.users.serializers import UserSerializer
 
 
 # Create your serializers here.
@@ -13,11 +12,10 @@ class MessageCreateSerializer(ModelSerializer):
         """Meta data"""
 
         model = Message
-        read_only_fields = ("user", "bot", "chat")
+        read_only_fields = ("bot", "chat")
         fields = (
             "id",
             "url",
-            "user",
             "bot",
             "chat",
             "content",
@@ -29,27 +27,10 @@ class MessageCreateSerializer(ModelSerializer):
         )
 
 
-class MessageSerializer(ModelSerializer):
+class MessageSerializer(MessageCreateSerializer):
     """Serialize messages"""
 
-    user = UserSerializer()
-
-    class Meta:
+    class Meta(MessageCreateSerializer.Meta):
         """Meta data"""
 
         depth = 1
-        model = Message
-        read_only_fields = ("user", "bot", "chat")
-        fields = (
-            "id",
-            "url",
-            "user",
-            "bot",
-            "chat",
-            "content",
-            "is_read",
-            "is_starred",
-            "is_edited",
-            "created_at",
-            "updated_at",
-        )
