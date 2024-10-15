@@ -12,35 +12,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
 
-      - name: Clone botland
-        run: |
-          git clone https://github.com/youzarsiph/botland
-          
       - name: Install Dependencies
         run: |
-          cp botland/requirements.txt requirements.txt
+          python -m venv .venv
+          source .vevn/bin/activate
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
       - name: Create a Django project and configure settings
         run: |
+          source .vevn/bin/activate
           python -m django startproject mysite
-          cp -r botland mysite/botland
+          mv dar_al_salam mysite
           cd mysite
-          echo "INSTALLED_APPS += ['botland', 'botland.bots', 'botland.chats', 'botland.messages', 'botland.users', 'rest_framework']" >> mysite/settings.py
           echo "AUTH_USER_MODEL = 'users.User'" >> mysite/settings.py
-
-      - name: Configure URLConf
-        run: |
-          cd mysite
+          echo "INSTALLED_APPS += ['botland', 'botland.bots', 'botland.chats', 'dar_al_salam.messages', 'dar_al_salam.users', 'rest_framework']" >> mysite/settings.py
           echo "from django.urls import include" >> mysite/urls.py
-          echo "urlpatterns += [path('', include('botland.urls'))]" >> mysite/urls.py
+          echo "urlpatterns += [path('', include('dar_al_salam.urls'))]" >> mysite/urls.py
 
       - name: Run Migrations, System checks and test
         run: |
+          source .vevn/bin/activate
           cd mysite
           python manage.py migrate
           python manage.py check

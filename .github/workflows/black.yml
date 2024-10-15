@@ -1,9 +1,10 @@
-name: Black Format
+name: Black
 
 on: [push]
 
 jobs:
-  build:
+
+  format:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,9 +15,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m venv .venv
+          source .venv/bin/activate
           python -m pip install --upgrade pip
-          pip install black
+          python -m pip install -r requirements.txt
+          python -m pip install black
 
       - name: Checking the code format with Black
         run: |
+          source .venv/bin/activate
           python -m black --check $(git ls-files '*.py')
