@@ -1,13 +1,13 @@
 [tool.poetry]
 package-mode = false
-name = "botland"
+name = "al-wazeer"
 version = "0.1.0"
-description = "BotLand: Chatbot land, Chat API with HuggingFace chat LLMs built with Python and Django."
+description = "AlWazeer: My AI assistant built with Python and Django."
 authors = ["Yousef Abu Shanab <josephyousef249@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/youzarsiph/botland"
-repository = "https://github.com/youzarsiph/botland"
+homepage = "https://github.com/youzarsiph/al-wzaeer"
+repository = "https://github.com/youzarsiph/al-wzaeer"
 
 [tool.poetry.dependencies]
 python = "^3.10"
