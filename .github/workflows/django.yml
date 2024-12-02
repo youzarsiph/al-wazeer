@@ -27,12 +27,12 @@ jobs:
         run: |
           source .vevn/bin/activate
           python -m django startproject mysite
-          mv dar_al_salam mysite
+          mv al_wazeer mysite
           cd mysite
           echo "AUTH_USER_MODEL = 'users.User'" >> mysite/settings.py
-          echo "INSTALLED_APPS += ['al_wazeer', 'al_wazeer.assistants', 'al_wazeer.chats', 'dar_al_salam.messages', 'dar_al_salam.users', 'rest_framework']" >> mysite/settings.py
+          echo "INSTALLED_APPS += ['al_wazeer', 'al_wazeer.assistants', 'al_wazeer.chats', 'al_wazeer.messages', 'al_wazeer.users', 'rest_framework']" >> mysite/settings.py
           echo "from django.urls import include" >> mysite/urls.py
-          echo "urlpatterns += [path('', include('dar_al_salam.urls'))]" >> mysite/urls.py
+          echo "urlpatterns += [path('', include('al_wazeer.urls'))]" >> mysite/urls.py
 
       - name: Run Migrations, System checks and test
         run: |
