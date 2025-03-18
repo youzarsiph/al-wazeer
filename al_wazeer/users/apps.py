@@ -1,10 +1,10 @@
-""" App Configuration for al_wazeer.users """
+"""App Configuration for al_wazeer.users"""
 
 from django.apps import AppConfig
 
 
 # Create your AppConf here.
-class AlWazeerUsersConfig(AppConfig):
+class UsersConfig(AppConfig):
     """al_wazeer.users AppConf"""
 
     name = "al_wazeer.users"

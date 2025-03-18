@@ -1,10 +1,10 @@
-""" Tests for al_wazeer.assistants.views """
+"""Tests for al_wazeer.assistants.views"""
 
-from django.test import TestCase
+from rest_framework.test import APITestCase
 
 
 # Create your view tests here.
-class AssistantViewSetTests(TestCase):
+class AssistantViewSetTests(APITestCase):
     """AssistantView tests"""
 
     def setUp(self) -> None:

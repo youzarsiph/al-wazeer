@@ -1,4 +1,4 @@
-""" AlWazeer: My AI assistant. """
+"""AlWazeer: My AI assistant."""
 
 from dotenv import load_dotenv
 

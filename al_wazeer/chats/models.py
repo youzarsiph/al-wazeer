@@ -1,4 +1,4 @@
-""" Data Models for al_wazeer.chats """
+"""Data Models for al_wazeer.chats"""
 
 from django.db import models
 from django.contrib.auth import get_user_model
@@ -9,24 +9,34 @@ User = get_user_model()
 
 
 class Chat(models.Model):
-    """AlWazeer Chats"""
+    """Chats"""
 
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="chats",
-        help_text="User",
+        help_text="Chat owner",
     )
     assistant = models.ForeignKey(
         "assistants.Assistant",
         on_delete=models.CASCADE,
         related_name="chats",
-        help_text="Assistant (Chat LLM)",
+        help_text="Chat assistant",
     )
     title = models.CharField(
         max_length=128,
         db_index=True,
         help_text="Chat title",
+    )
+    description = models.CharField(
+        max_length=512,
+        db_index=True,
+        help_text="Chat description",
+    )
+    role = models.CharField(
+        max_length=1024,
+        default="You are a helpful assistant.",
+        help_text="The role that the assistant will play.",
     )
     is_pinned = models.BooleanField(
         default=False,
@@ -43,15 +53,9 @@ class Chat(models.Model):
 
     @property
     def message_count(self) -> int:
-        """Number of a messages of a chat"""
+        """Number of messages"""
 
         return self.messages.count()
-
-    @property
-    def unread_message_count(self) -> int:
-        """Number of a unread messages of a chat"""
-
-        return self.messages.filter(is_read=False).count()
 
     def __str__(self) -> str:
         return f"{self.user}-{self.assistant}: {self.title}"

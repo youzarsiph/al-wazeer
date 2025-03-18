@@ -1,1 +1,1 @@
-""" Tests for al_wazeer.users """
+"""Tests for al_wazeer.users"""

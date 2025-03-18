@@ -1,4 +1,4 @@
-""" Serializers for al_wazeer.messages """
+"""Serializers for al_wazeer.messages"""
 
 from rest_framework.serializers import ModelSerializer
 
@@ -6,21 +6,19 @@ from al_wazeer.messages.models import Message
 
 
 # Create your serializers here.
-class MessageCreateSerializer(ModelSerializer):
-    """Serialize messages for create action"""
+class MessageSerializer(ModelSerializer):
+    """Serialize messages"""
 
     class Meta:
         """Meta data"""
 
         model = Message
-        read_only_fields = ("assistant", "chat")
+        read_only_fields = ("chat", "assistant")
         fields = (
             "id",
-            "url",
-            "assistant",
             "chat",
+            "assistant",
             "content",
-            "is_read",
             "is_starred",
             "is_edited",
             "created_at",
@@ -28,10 +26,14 @@ class MessageCreateSerializer(ModelSerializer):
         )
 
 
-class MessageSerializer(MessageCreateSerializer):
+class HyperLinkedMessageSerializer(MessageSerializer):
     """Serialize messages"""
 
-    class Meta(MessageCreateSerializer.Meta):
+    class Meta(MessageSerializer.Meta):
         """Meta data"""
 
-        depth = 1
+        fields = (
+            MessageSerializer.Meta.fields[:1]
+            + ("url",)
+            + MessageSerializer.Meta.fields[1:]
+        )

@@ -1,10 +1,10 @@
-""" App Configuration for al_wazeer.messages """
+"""App Configuration for al_wazeer.messages"""
 
 from django.apps import AppConfig
 
 
 # Create your AppConf here.
-class AlWazeerMessagesConfig(AppConfig):
+class MessagesConfig(AppConfig):
     """al_wazeer.messages AppConf"""
 
     name = "al_wazeer.messages"

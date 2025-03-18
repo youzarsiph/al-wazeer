@@ -1,0 +1,39 @@
+{% extends 'ui/assistant/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {{ title }}{% endblock %}
+
+{% block sidebar_styles %} hidden lg:block{% endblock %}
+{% block content_styles %}{% endblock %}
+
+{% block content %}
+<section class="relative grid h-full w-full grid-rows-12 gap-4">
+  <header class="absolute inset-x-0 top-0 z-10">
+    <nav class="navbar items-center justify-between gap-4 rounded-t-box backdrop-blur-3xl">
+      <div class="flex items-center gap-4">
+        <div class="tooltip tooltip-right" data-tip="{% translate 'Back' %}">
+          <a href="{% url 'al-wazeer:assistants' %}" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-chevron-left">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+
+            <span class="sr-only">{% translate 'Back' %}</span>
+          </a>
+        </div>
+
+        <h1 class="text-lg font-semibold">{{ title }}</h1>
+      </div>
+    </nav>
+  </header>
+
+  <main class="row-span-12 flex h-full flex-col gap-4 overflow-y-auto px-4 pt-16">
+    <div class="grid gap-4">
+      {% include 'ui/components/form.html' %}
+    </div>
+  </main>
+</section>
+
+{% endblock %}

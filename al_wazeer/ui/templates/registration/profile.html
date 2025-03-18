@@ -1,0 +1,13 @@
+{% extends 'registration/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% translate 'Profile' %}{% endblock %}
+
+{% block breadcrumbs %}
+<li>{{ request.user }}</li>
+{% endblock %}
+
+{% block main_content %}
+
+{% endblock %}

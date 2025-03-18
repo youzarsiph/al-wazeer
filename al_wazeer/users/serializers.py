@@ -1,4 +1,4 @@
-""" Serializers for al_wazeer.users """
+"""Serializers for al_wazeer.users"""
 
 from rest_framework.serializers import ModelSerializer
 from al_wazeer.users.models import User

@@ -1,10 +1,10 @@
-""" Tests for al_wazeer.messages.views """
+"""Tests for al_wazeer.messages.views"""
 
-from django.test import TestCase
+from rest_framework.test import APITestCase
 
 
 # Create your view tests here.
-class MessageViewSetTests(TestCase):
+class MessageViewSetTests(APITestCase):
     """MessageViewSet tests"""
 
     def setUp(self) -> None:

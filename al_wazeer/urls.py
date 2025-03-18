@@ -1,4 +1,4 @@
-""" URL Configuration for al_wazeer """
+"""URL Configuration for al_wazeer"""
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter

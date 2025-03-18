@@ -1,1 +1,1 @@
-""" Al-Wuzaraa: AI assistants """
+"""Al-Wuzaraa: AI assistants"""

@@ -1,1 +1,1 @@
-""" Tests for al_wazeer.chats """
+"""Tests for al_wazeer.chats"""

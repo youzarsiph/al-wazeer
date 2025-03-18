@@ -1,1 +1,1 @@
-""" Tests for al_wazeer.messages """
+"""Tests for al_wazeer.messages"""

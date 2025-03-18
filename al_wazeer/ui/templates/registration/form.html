@@ -1,0 +1,22 @@
+{% extends 'registration/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% translate 'Profile' %} | {{ title }}{% endblock %}
+
+{% block sidebar_styles %} hidden lg:block{% endblock %}
+{% block content_styles %}{% endblock %}
+
+{% block breadcrumbs %}
+<li>{{ request.user }}</li>
+<li>{{ title }}</li>
+{% endblock %}
+
+{% block main_content %}
+<div class="grid gap-4">
+  <h1 class="text-lg font-semibold">{{ title }}</h1>
+  <p>{{ description }}</p>
+
+  {% include 'ui/components/form.html' %}
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-""" Mixins """
+"""Mixins"""
 
 
 # Create your mixins here.

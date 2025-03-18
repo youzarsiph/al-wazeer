@@ -1,4 +1,4 @@
-""" Serializers for al_wazeer.assistants """
+"""Serializers for al_wazeer.assistants"""
 
 from rest_framework.serializers import ModelSerializer
 
@@ -16,8 +16,10 @@ class AssistantSerializer(ModelSerializer):
         fields = (
             "id",
             "url",
+            "image",
             "name",
             "model",
+            "model_url",
             "description",
             "chat_count",
             "created_at",

@@ -1,4 +1,4 @@
-""" App Configuration for al_wazeer """
+"""App Configuration for al_wazeer"""
 
 from django.apps import AppConfig
 

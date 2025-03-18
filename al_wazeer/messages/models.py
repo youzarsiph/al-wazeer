@@ -1,4 +1,4 @@
-""" Data Models for al_wazeer.messages """
+"""Data Models for al_wazeer.messages"""
 
 from django.db import models
 from django.contrib.auth import get_user_model
@@ -15,9 +15,7 @@ class Message(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name="messages",
-        null=True,
-        blank=True,
-        help_text="User",
+        help_text="Message owner",
     )
     assistant = models.ForeignKey(
         "assistants.Assistant",
@@ -25,25 +23,23 @@ class Message(models.Model):
         related_name="messages",
         null=True,
         blank=True,
-        help_text="Assistant",
+        help_text="Message assistant",
     )
     chat = models.ForeignKey(
         "chats.Chat",
         on_delete=models.CASCADE,
         related_name="messages",
-        help_text="Chat",
+        null=True,
+        blank=True,
+        help_text="Message chat",
     )
     content = models.TextField(
         db_index=True,
         help_text="Message content",
     )
-    is_read = models.BooleanField(
-        default=False,
-        help_text="Designates if the message is viewed by user",
-    )
     is_starred = models.BooleanField(
         default=False,
-        help_text="Designates if the message is saved or added to favorites",
+        help_text="Designates if the message is added to starred messages",
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -61,4 +57,6 @@ class Message(models.Model):
         return self.created_at != self.updated_at
 
     def __str__(self) -> str:
-        return f"{self.user if self.user is not None else self.assistant}: {self.content[:10]}..."
+        return (
+            f"{self.assistant if self.assistant else self.user}: {self.content[:10]}..."
+        )

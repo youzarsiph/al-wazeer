@@ -1,4 +1,4 @@
-""" Custom access permissions """
+"""Custom access permissions"""
 
 from rest_framework.permissions import BasePermission
 
@@ -8,11 +8,11 @@ class IsOwner(BasePermission):
     """Allow access to the owner of the object"""
 
     def has_object_permission(self, request, view, obj):
-        return request.user == obj.user
+        return request.user.id == obj.user_id
 
 
 class IsAccountOwner(BasePermission):
     """Allow access to the owner of the user account"""
 
     def has_object_permission(self, request, view, obj):
-        return request.user == obj
+        return request.user.id == obj.id

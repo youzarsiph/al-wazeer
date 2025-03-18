@@ -1,16 +1,21 @@
-""" Data Models for al_wazeer.assistants """
+"""Data Models for al_wazeer.assistants"""
 
 from django.db import models
 
 
 # Create your models here.
 class Assistant(models.Model):
-    """AlWuzaraa AI assistants"""
+    """Al-Wuzaraa AI assistants"""
 
+    image = models.ImageField(
+        upload_to="images/assistants/",
+        help_text="Assistant image",
+    )
     name = models.CharField(
         max_length=128,
+        unique=True,
         db_index=True,
-        help_text="Assistant name (Chat LLM)",
+        help_text="Assistant name",
     )
     model = models.CharField(
         max_length=128,
@@ -33,10 +38,16 @@ class Assistant(models.Model):
     )
 
     @property
-    def chat_count(self):
+    def chat_count(self) -> int:
         """Number of chats of an assistant"""
 
         return self.chats.count()
+
+    @property
+    def model_url(self) -> str:
+        """URL of the model (LLM) on HuggingFace Hub"""
+
+        return f"https://huggingface.co/{self.model}"
 
     def __str__(self) -> str:
         return self.name

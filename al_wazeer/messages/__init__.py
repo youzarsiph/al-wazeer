@@ -1,1 +1,1 @@
-""" AlWazeer Messages """
+"""Messages"""

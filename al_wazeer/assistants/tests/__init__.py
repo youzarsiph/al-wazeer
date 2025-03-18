@@ -1,1 +1,1 @@
-""" Tests for al_wazeer.assistants """
+"""Tests for al_wazeer.assistants"""

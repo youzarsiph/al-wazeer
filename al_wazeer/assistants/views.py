@@ -1,4 +1,4 @@
-""" Views for al_wazeer.assistants """
+"""Views for al_wazeer.assistants"""
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -16,10 +16,10 @@ class AssistantViewSet(ModelViewSet):
     permission_classes = (IsAuthenticated, IsAdminUser)
     filterset_fields = ("id", "model")
     search_fields = ("name", "model", "description")
-    ordering_fields = ("id", "name", "created_at", "updated_at")
+    ordering_fields = ("name", "created_at", "updated_at")
 
     def get_permissions(self):
-        """Allow read only access for users and read/write access to staffs"""
+        """Allow read only access for users"""
 
         if self.action in ("list", "retrieve"):
             self.permission_classes = (IsAuthenticated,)

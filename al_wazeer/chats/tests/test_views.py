@@ -1,10 +1,10 @@
-""" Tests for al_wazeer.chats.views """
+"""Tests for al_wazeer.chats.views"""
 
-from django.test import TestCase
+from rest_framework.test import APITestCase
 
 
 # Create your view tests here.
-class ChatViewSetTests(TestCase):
+class ChatViewSetTests(APITestCase):
     """ChatViewSet tests"""
 
     def setUp(self) -> None:

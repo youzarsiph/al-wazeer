@@ -1,1 +1,1 @@
-""" AlWazeer Chats """
+"""Chats"""

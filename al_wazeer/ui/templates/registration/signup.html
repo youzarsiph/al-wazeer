@@ -1,0 +1,28 @@
+{% extends "registration/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% translate 'Sign up' %}{% endblock %}
+
+{% block main %}
+<section class="flex h-full w-full max-h-screen overflow-y-auto items-center justify-center rounded-box bg-base-100">
+  <div class="card gap-4 mx-2 max-w-md card-body w-full rounded-box bg-base-200 mt-40 mb-20">
+    <h1 class="text-3xl font-black">
+      {% translate 'Sign up' %} <span class="text-primary">{% translate 'Al-Wazeer' %}</span>
+    </h1>
+
+    <p>{% translate 'Welcome, please signup to continue.' %}</p>
+
+    {% include 'ui/components/form.html' %}
+
+    <p>
+      <a href="{% url 'al-wazeer:login' %}" class="btn btn-ghost">
+        {% translate 'Already have an account?' %}
+      </a>
+      <a href="{% url 'al-wazeer:password_reset' %}" class="btn btn-ghost">
+        {% translate 'Lost password?' %}
+      </a>
+    </p>
+  </div>
+</section>
+{% endblock %}

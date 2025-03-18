@@ -1,10 +1,10 @@
-""" App Configuration for al_wazeer.assistants """
+"""App Configuration for al_wazeer.assistants"""
 
 from django.apps import AppConfig
 
 
 # Create your AppConf here.
-class AlWazeerAssistantsConfig(AppConfig):
+class AssistantsConfig(AppConfig):
     """al_wazeer.assistants AppConf"""
 
     name = "al_wazeer.assistants"
