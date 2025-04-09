@@ -9,5 +9,3 @@ class AssistantViewSetTests(APITestCase):
 
     def setUp(self) -> None:
         """Setup before tests"""
-
-        pass

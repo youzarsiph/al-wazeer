@@ -17,11 +17,10 @@ jobs:
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-          python -m pip install ruff
+          pip install --upgrade pip
+          pip install ruff
 
       - name: Analyzing the code with Ruff
         run: |
           source .venv/bin/activate
-          python -m ruff check $(git ls-files '*.py')
+          ruff check .

@@ -9,5 +9,3 @@ class AssistantTests(TestCase):
 
     def setUp(self) -> None:
         """Setup before tests"""
-
-        pass
