@@ -1,22 +1,29 @@
-{% extends 'registration/base.html' %}
+<!-- prettier ignore -->
+{% extends 'registration/base.html' %}{% load i18n %}
 
-{% load i18n %}
+<!-- prettier ignore -->
+{% block title %}{{ block.super }} | {% translate 'Profile' %} | {{ title }}{%
+endblock %}
 
-{% block title %}{{ block.super }} | {% translate 'Profile' %} | {{ title }}{% endblock %}
-
+<!-- prettier ignore -->
 {% block sidebar_styles %} hidden lg:block{% endblock %}
+
+<!-- prettier ignore -->
 {% block content_styles %}{% endblock %}
 
+<!-- prettier ignore -->
 {% block breadcrumbs %}
 <li>{{ request.user }}</li>
 <li>{{ title }}</li>
 {% endblock %}
 
+<!-- prettier ignore -->
 {% block main_content %}
 <div class="grid gap-4">
   <h1 class="text-lg font-semibold">{{ title }}</h1>
   <p>{{ description }}</p>
 
+  <!-- prettier ignore -->
   {% include 'ui/components/form.html' %}
 </div>
 {% endblock %}

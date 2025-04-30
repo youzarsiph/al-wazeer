@@ -145,7 +145,6 @@ class MessageConsumer(AsyncJsonWebsocketConsumer):
 
         if isinstance(data, dict):
             if data["type"] == "retry":
-                print("Retrying")
                 return data
 
             serializer = MessageSerializer(data=data["message"])

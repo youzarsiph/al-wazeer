@@ -1,35 +1,38 @@
-{% extends "ui/base.html" %}
+<!-- prettier ignore -->
+{% extends "ui/base.html" %}{% load i18n %}
 
-{% load i18n %}
-
+<!-- prettier ignore -->
 {% block title %}{{ block.super }} | {% translate 'Profile' %}{% endblock %}
 
+<!-- prettier ignore -->
 {% block content_styles %} hidden lg:block{% endblock %}
 
+<!-- prettier ignore -->
 {% block sidebar %}
 <section class="relative flex h-full flex-col gap-6 rounded-box">
   <header class="absolute inset-x-0 top-0 z-10">
-    <nav class="flex items-center justify-between p-4 gap-4 backdrop-blur-3xl rounded-t-box">
-      <div class="flex items-center gap-4">
-        <div class="tooltip tooltip-bottom lg:hidden" data-tip="{% translate 'Back' %}">
-          <a href="{% url 'al-wazeer:index' %}" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-chevron-left">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-            <span class="sr-only">{% translate 'Back' %}</span>
-          </a>
-        </div>
-
-        <h1 class="text-xl font-semibold">{% translate 'Profile' %}</h1>
-      </div>
+    <nav
+      class="flex items-center justify-between p-4 gap-4 backdrop-blur-3xl rounded-box"
+    >
+      <h1 class="text-xl font-semibold">{% translate 'Profile' %}</h1>
 
       <div class="tooltip tooltip-bottom tooltip-primary" data-tip="New chat">
-        <a href="{% url 'al-wazeer:create-chat' %}" class="btn btn-square btn-sm btn-primary btn-soft">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-plus">
+        <a
+          href="{% url 'al-wazeer:create-chat' %}"
+          class="btn btn-square btn-sm btn-primary btn-soft"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-plus"
+          >
             <path d="M5 12h14" />
             <path d="M12 5v14" />
           </svg>
@@ -40,17 +43,32 @@
     </nav>
   </header>
 
-  <main class="grid grow gap-4 h-full w-full p-4 pt-20 max-h-dvh overflow-y-auto">
+  <main
+    class="grid grow gap-4 h-full w-full p-4 pt-20 max-h-dvh overflow-y-auto"
+  >
     <nav class="menu menu-vertical gap-2 w-full justify-between p-0">
       <ul class="menu menu-vertical gap-2 w-full p-0">
-        <li class="menu-title">
-          {% translate 'Welcome' %} {{ request.user }}
-        </li>
-        <li class="tooltip tooltip-bottom tooltip-primary" data-tip="{% translate 'My Profile' %}">
-          <a href="{% url 'al-wazeer:index' %}" class="btn btn-soft btn-primary justify-start gap-4 w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-user size-4 lg:size-6">
+        <li class="menu-title">{% translate 'Welcome' %} {{ request.user }}</li>
+        <li
+          class="tooltip tooltip-bottom tooltip-primary"
+          data-tip="{% translate 'My Profile' %}"
+        >
+          <a
+            href="{% url 'al-wazeer:profile' %}"
+            class="btn btn-soft btn-primary justify-start gap-4 w-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-user size-4 lg:size-6"
+            >
               <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
@@ -58,24 +76,55 @@
             <span>{% translate 'Profile' %}</span>
           </a>
         </li>
-        <li class="tooltip tooltip-bottom" data-tip="{% translate 'Edit account' %}">
-          <a href="{% url 'al-wazeer:update-user' request.user.id %}" class="btn btn-ghost justify-start gap-4 w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-pencil size-4 lg:size-6">
+        <li
+          class="tooltip tooltip-bottom"
+          data-tip="{% translate 'Edit account' %}"
+        >
+          <a
+            href="{% url 'al-wazeer:update-user' request.user.id %}"
+            class="btn btn-ghost justify-start gap-4 w-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-pencil size-4 lg:size-6"
+            >
               <path
-                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+              />
               <path d="m15 5 4 4" />
             </svg>
 
             <span>{% translate 'Edit account' %}</span>
           </a>
         </li>
-        <li class="tooltip tooltip-bottom" data-tip="{% translate 'Change Password' %}">
-          <a href="{% url 'al-wazeer:password_change' %}" class="btn btn-ghost justify-start gap-4 w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-trash-2 size-4 lg:size-6">
+        <li
+          class="tooltip tooltip-bottom"
+          data-tip="{% translate 'Change Password' %}"
+        >
+          <a
+            href="{% url 'al-wazeer:password_change' %}"
+            class="btn btn-ghost justify-start gap-4 w-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-trash-2 size-4 lg:size-6"
+            >
               <path d="M3 6h18" />
               <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
               <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -86,12 +135,29 @@
             <span>{% translate 'Change Password' %}</span>
           </a>
         </li>
-        <li class="tooltip tooltip-bottom" data-tip="{% translate 'Reset Password' %}">
-          <a href="{% url 'al-wazeer:password_reset' %}" class="btn btn-ghost justify-start gap-4 w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-brain-circuit size-4 lg:size-6">
-              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+        <li
+          class="tooltip tooltip-bottom"
+          data-tip="{% translate 'Reset Password' %}"
+        >
+          <a
+            href="{% url 'al-wazeer:password_reset' %}"
+            class="btn btn-ghost justify-start gap-4 w-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-brain-circuit size-4 lg:size-6"
+            >
+              <path
+                d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+              />
               <path d="M9 13a4.5 4.5 0 0 0 3-4" />
               <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
               <path d="M3.477 10.896a4 4 0 0 1 .585-.396" />
@@ -112,12 +178,26 @@
       </ul>
 
       <ul class="menu menu-vertical gap-2 w-full p-0">
-        <li class="tooltip tooltip-top tooltip-error" data-tip="{% translate 'Delete account' %}">
-          <a href="{% url 'al-wazeer:delete-user' request.user.id %}"
-            class="btn btn-soft btn-error justify-start gap-4 w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-trash-2 size-4 lg:size-6">
+        <li
+          class="tooltip tooltip-top tooltip-error"
+          data-tip="{% translate 'Delete account' %}"
+        >
+          <a
+            href="{% url 'al-wazeer:delete-user' request.user.id %}"
+            class="btn btn-soft btn-error justify-start gap-4 w-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-trash-2 size-4 lg:size-6"
+            >
               <path d="M3 6h18" />
               <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
               <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -129,10 +209,23 @@
           </a>
         </li>
         <li class="tooltip tooltip-top" data-tip="{% translate 'Logout' %}">
-          <button form="logout-form" type="submit" class="btn btn-ghost justify-start gap-4 w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-log-out size-4 lg:size-6">
+          <button
+            form="logout-form"
+            type="submit"
+            class="btn btn-ghost justify-start gap-4 w-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-log-out size-4 lg:size-6"
+            >
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
               <polyline points="16 17 21 12 16 7" />
               <line x1="21" x2="9" y1="12" y2="12" />
@@ -147,21 +240,11 @@
 </section>
 {% endblock %}
 
+<!-- prettier ignore -->
 {% block content %}
 <section class="relative h-full w-full">
   <header class="absolute inset-x-0 top-0 z-10">
-    <nav class="flex items-center p-4 gap-4 backdrop-blur-3xl rounded-t-box">
-      <div class="tooltip tooltip-bottom lg:hidden" data-tip="{% translate 'Back' %}">
-        <a href="{% url 'al-wazeer:profile' %}" class="btn btn-square btn-ghost">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-chevron-left">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-          <span class="sr-only">{% translate 'Back' %}</span>
-        </a>
-      </div>
-
+    <nav class="flex items-center p-4 gap-4 backdrop-blur-3xl rounded-box">
       <div class="breadcrumbs p-0">
         <ol>
           <li>
@@ -176,9 +259,10 @@
   </header>
 
   <main class="h-full w-full p-4 pt-16 max-h-dvh overflow-y-auto">
-    {% include 'ui/components/messages.html' %}
-
-    {% block main_content %}{% endblock %}
+    <!-- prettier ignore -->
+    <!-- prettier ignore -->
+    {% include 'ui/components/messages.html' %}{% block main_content %}{%
+    endblock %}
   </main>
 </section>
 {% endblock %}

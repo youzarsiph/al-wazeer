@@ -1,35 +1,41 @@
-{% extends 'ui/base.html' %}
+<!-- prettier ignore -->
+{% extends 'ui/base.html' %}{% load i18n %}
 
-{% load i18n %}
-
+<!-- prettier ignore -->
 {% block title %}{{ block.super }} | {% translate 'Assistants' %}{% endblock %}
 
+<!-- prettier ignore -->
 {% block content_styles %} hidden lg:block{% endblock %}
 
+<!-- prettier ignore -->
 {% block sidebar %}
 <section class="relative flex h-full flex-col gap-6 rounded-box">
   <header class="absolute inset-x-0 top-0 z-10">
-    <nav class=" flex items-center justify-between p-4 gap-4 rounded-t-box backdrop-blur-3xl">
-      <div class="flex items-center gap-4">
-        <div class="tooltip tooltip-bottom lg:hidden" data-tip="{% translate 'Back' %}">
-          <a href="{% url 'al-wazeer:index' %}" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-chevron-left">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-            <span class="sr-only">{% translate 'Back' %}</span>
-          </a>
-        </div>
+    <nav
+      class="flex items-center justify-between p-4 gap-4 rounded-box backdrop-blur-3xl"
+    >
+      <h1 class="text-xl font-semibold">{% translate 'Assistants' %}</h1>
 
-        <h1 class="text-xl font-semibold">{% translate 'Assistants' %}</h1>
-      </div>
-
-      <div class="tooltip tooltip-bottom tooltip-primary" data-tip="{% translate 'New' %}">
-        <a href="{% url 'al-wazeer:create-assistant' %}" class="btn btn-square btn-sm btn-primary btn-soft">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-plus">
+      <div
+        class="tooltip tooltip-bottom tooltip-primary"
+        data-tip="{% translate 'New' %}"
+      >
+        <a
+          href="{% url 'al-wazeer:create-assistant' %}"
+          class="btn btn-square btn-sm btn-primary btn-soft"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-plus"
+          >
             <path d="M5 12h14" />
             <path d="M12 5v14" />
           </svg>
@@ -40,20 +46,30 @@
     </nav>
   </header>
 
-  <main class="grid grow gap-4 h-full w-full p-4 pt-20 max-h-dvh overflow-y-auto">
+  <main
+    class="grid grow gap-4 h-full w-full p-4 pt-20 max-h-dvh overflow-y-auto"
+  >
     <ul class="list w-full rounded-box bg-base-200">
+      <!-- prettier ignore -->
       {% for assistant in assistant_list.all %}
-      <li class="list-row items-center">
+      <li class="list-row relative items-center">
         <div>
+          <!-- prettier ignore -->
           {% if assistant.image %}
-          <img class="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" />
+          <img
+            class="size-10 rounded-box"
+            src="https://img.daisyui.com/images/profile/demo/1@94.webp"
+          />
+          <!-- prettier ignore -->
           {% else %}
           <div class="avatar avatar-placeholder">
             <div
-              class="w-10 rounded-full {% cycle 'bg-primary text-primary-content' 'bg-secondary text-secondary-content' 'bg-accent text-accent-content' 'bg-success text-success-content' 'bg-warning text-warning-content' 'bg-error text-error-content' 'bg-neutral text-neutral-content' %}">
+              class="w-10 rounded-full {% cycle 'bg-primary text-primary-content' 'bg-secondary text-secondary-content' 'bg-accent text-accent-content' 'bg-success text-success-content' 'bg-warning text-warning-content' 'bg-error text-error-content' 'bg-neutral text-neutral-content' %}"
+            >
               <span class="text-xl">{{ assistant.name|slice:'0:1' }}</span>
             </div>
           </div>
+          <!-- prettier ignore -->
           {% endif %}
         </div>
         <div>
@@ -63,24 +79,51 @@
           </div>
         </div>
         <div class="tooltip tooltip-left" data-tip="{% translate 'View' %}">
-          <a href="{% url 'al-wazeer:view-assistant' assistant.id %}" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-chevron-right">
+          <button class="btn btn-square btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide size-4 lg:size-6 lucide-chevron-right"
+            >
               <path d="m9 18 6-6-6-6" />
             </svg>
 
             <span class="sr-only">{% translate 'View' %}</span>
-          </a>
+          </button>
         </div>
+        <a
+          href="{% url 'al-wazeer:view-assistant' assistant.id %}"
+          class="absolute inset-0"
+        >
+          <span class="sr-only">{% translate 'View' %}</span>
+        </a>
       </li>
       {% empty %}
       <li class="list-row items-center">
         <div class="tooltip tooltip-right" data-tip="{% translate 'New' %}">
-          <a href="{% url 'al-wazeer:create-assistant' %}" class="btn btn-lg btn-square btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-plus">
+          <a
+            href="{% url 'al-wazeer:create-assistant' %}"
+            class="btn btn-lg btn-square btn-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide size-4 lg:size-6 lucide-plus"
+            >
               <path d="M5 12h14" />
               <path d="M12 5v14" />
             </svg>
@@ -89,21 +132,26 @@
           </a>
         </div>
         <div>
-          <h3>No Assistants</h3>
+          <h3>{% translate 'No Assistants' %}</h3>
           <p class="text-xs font-semibold opacity-60">
             {% translate 'Click the plus button to add one!' %}
           </p>
         </div>
       </li>
+      <!-- prettier ignore -->
       {% endfor %}
     </ul>
   </main>
 </section>
 {% endblock %}
 
+<!-- prettier ignore -->
 {% block content %}
 <section class="h-full w-full p-4">
-  <div>{% include 'ui/components/messages.html' %}</div>
+  <div>
+    <!-- prettier ignore -->
+    {% include 'ui/components/messages.html' %}
+  </div>
 
   <div class="flex flex-col items-center justify-center gap-8 h-full w-full">
     <h1 class="text-3xl font-semibold">
@@ -113,9 +161,18 @@
       {% translate 'Your AI assistant is here.' %}
     </p>
     <a href="{% url 'al-wazeer:create-assistant' %}" class="btn btn-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="lucide lucide-plus">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide size-4 lg:size-6 lucide-plus"
+      >
         <path d="M5 12h14"></path>
         <path d="M12 5v14"></path>
       </svg>

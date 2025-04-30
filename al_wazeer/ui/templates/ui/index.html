@@ -1,18 +1,26 @@
-{% extends 'ui/base.html' %}
+<!-- prettier ignore -->
+{% extends 'ui/base.html' %}{% load i18n %}
 
-{% load i18n %}
-
+<!-- prettier ignore -->
 {% block main %}
 <div class="grid h-full w-full grid-cols-12 rounded-box bg-base-100">
   <div class="carousel carousel-vertical h-full w-full col-span-12 rounded-box">
     <div class="carousel-item h-full w-full">
       <section class="flex flex-col gap-8 w-full p-4 overflow-auto lg:p-20">
-        <h1 class="text-5xl font-black tracking-wide lg:text-7xl" style="font-family: 'Noto Serif';">AL Wazeer</h1>
-        <h2 class="text-xl font-bold lg:text-3xl">Your Gateway to AI Conversations</h2>
+        <h1
+          class="text-5xl font-black tracking-wide lg:text-7xl"
+          style="font-family: &quot;Noto Serif&quot;"
+        >
+          AL Wazeer
+        </h1>
+        <h2 class="text-xl font-bold lg:text-3xl">
+          Your Gateway to AI Conversations
+        </h2>
 
         <p>
-          Al-Wazeer is your ultimate AI-powered platform, connecting you with advanced open-source language models like
-          Meta Llama, Qwen, and Microsoft Phi
+          Al-Wazeer is your ultimate AI-powered platform, connecting you with
+          advanced open-source language models like Meta Llama, Qwen, and
+          Microsoft Phi
         </p>
 
         <a href="{% url 'al-wazeer:login' %}" class="btn btn-lg btn-primary">
@@ -22,20 +30,33 @@
     </div>
     <div class="carousel-item h-full w-full">
       <section class="flex flex-col gap-8 w-full p-4 overflow-auto lg:p-20">
-        <h1 class="text-5xl font-black tracking-wide lg:text-7xl" style="font-family: 'Noto Serif';">The platform</h1>
+        <h1
+          class="text-5xl font-black tracking-wide lg:text-7xl"
+          style="font-family: &quot;Noto Serif&quot;"
+        >
+          The platform
+        </h1>
 
         <h2 class="text-3xl font-bold lg:text-5xl">What is Al-Wazeer?</h2>
 
         <p>
-          Al-Wazeer is a cutting-edge AI chat platform designed to revolutionize how you interact with language models.
-          Whether you're an individual seeking intelligent conversations or a business aiming to optimize customer
-          engagement, Al-Wazeer has you covered.
+          Al-Wazeer is a cutting-edge AI chat platform designed to revolutionize
+          how you interact with language models. Whether you're an individual
+          seeking intelligent conversations or a business aiming to optimize
+          customer engagement, Al-Wazeer has you covered.
         </p>
       </section>
     </div>
     <div class="carousel-item h-full w-full">
-      <section class="flex flex-col gap-8 justify-around w-full p-4 overflow-auto lg:p-20">
-        <h1 class="text-5xl font-black tracking-wide lg:text-7xl" style="font-family: 'Noto Serif';">Features</h1>
+      <section
+        class="flex flex-col gap-8 justify-around w-full p-4 overflow-auto lg:p-20"
+      >
+        <h1
+          class="text-5xl font-black tracking-wide lg:text-7xl"
+          style="font-family: &quot;Noto Serif&quot;"
+        >
+          Features
+        </h1>
 
         <h2 class="text-xl font-bold lg:text-3xl">
           Unleash the Power of AI with Al-Wazeer
@@ -45,9 +66,18 @@
           <li class="col-span-12 lg:col-span-4">
             <div class="card h-full w-full shadow-sm">
               <figure class="py-16">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-bot-icon lucide-bot size-32">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-bot-icon lucide-bot size-32"
+                >
                   <path d="M12 8V4H8" />
                   <rect width="16" height="12" x="4" y="8" rx="2" />
                   <path d="M2 14h2" />
@@ -61,17 +91,31 @@
                   <h2 class="text-3xl font-bold">Diverse AI Models</h2>
                 </div>
 
-                <p>Chat seamlessly with multiple leading open-source language models.</p>
+                <p>
+                  Chat seamlessly with multiple leading open-source language
+                  models.
+                </p>
               </div>
             </div>
           </li>
           <li class="col-span-12 lg:col-span-4">
             <div class="card h-full w-full shadow-sm">
               <figure class="py-16">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-message-square-text-icon lucide-message-square-text size-32">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-message-square-text-icon lucide-message-square-text size-32"
+                >
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  />
                   <path d="M13 8H7" />
                   <path d="M17 12H7" />
                 </svg>
@@ -88,11 +132,21 @@
           <li class="col-span-12 lg:col-span-4">
             <div class="card h-full w-full shadow-sm">
               <figure class="py-16">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-brain-cog-icon lucide-brain-cog size-32">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-brain-cog-icon lucide-brain-cog size-32"
+                >
                   <path
-                    d="M12 5a3 3 0 1 0-5.997.142 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588 4 4 0 0 0 7.636 2.106 3.2 3.2 0 0 0 .164-.546c.028-.13.306-.13.335 0a3.2 3.2 0 0 0 .163.546 4 4 0 0 0 7.636-2.106 4 4 0 0 0 .556-6.588 4 4 0 0 0-2.526-5.77A3 3 0 1 0 12 5" />
+                    d="M12 5a3 3 0 1 0-5.997.142 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588 4 4 0 0 0 7.636 2.106 3.2 3.2 0 0 0 .164-.546c.028-.13.306-.13.335 0a3.2 3.2 0 0 0 .163.546 4 4 0 0 0 7.636-2.106 4 4 0 0 0 .556-6.588 4 4 0 0 0-2.526-5.77A3 3 0 1 0 12 5"
+                  />
                   <path d="M17.599 6.5a3 3 0 0 0 .399-1.375" />
                   <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
                   <path d="M3.477 10.896a4 4 0 0 1 .585-.396" />
@@ -123,21 +177,37 @@
       </section>
     </div>
     <div class="carousel-item h-full w-full">
-      <section class="flex flex-col gap-8 justify-around w-full p-4 overflow-auto lg:p-20">
-        <h1 class="text-5xl font-black tracking-wide lg:text-7xl" style="font-family: 'Noto Serif';">
+      <section
+        class="flex flex-col gap-8 justify-around w-full p-4 overflow-auto lg:p-20"
+      >
+        <h1
+          class="text-5xl font-black tracking-wide lg:text-7xl"
+          style="font-family: &quot;Noto Serif&quot;"
+        >
           Use cases
         </h1>
 
-        <h2 class="text-xl font-bold lg:text-3xl">Who Can Benefit from Al-Wazeer?</h2>
+        <h2 class="text-xl font-bold lg:text-3xl">
+          Who Can Benefit from Al-Wazeer?
+        </h2>
 
         <ul class="grid gap-4 lg:grid-cols-12">
           <li class="col-span-12 lg:col-span-4">
             <div class="card h-full w-full shadow-sm">
               <div class="card-body gap-6">
                 <figure class="py-16">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-building2-icon lucide-building-2 size-32">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-building2-icon lucide-building-2 size-32"
+                  >
                     <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
                     <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
                     <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
@@ -153,7 +223,9 @@
                 </div>
 
                 <div>
-                  <p>Enhance customer service with AI-powered chat solutions.</p>
+                  <p>
+                    Enhance customer service with AI-powered chat solutions.
+                  </p>
                 </div>
               </div>
             </div>
@@ -162,9 +234,18 @@
             <div class="card h-full w-full shadow-sm">
               <div class="card-body gap-6">
                 <figure class="py-16">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-user-icon lucide-user size-32">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-user-icon lucide-user size-32"
+                  >
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                     <circle cx="12" cy="7" r="4" />
                   </svg>
@@ -184,9 +265,18 @@
             <div class="card h-full w-full shadow-sm">
               <div class="card-body gap-6">
                 <figure class="py-16">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-code-icon lucide-code size-32">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-code-icon lucide-code size-32"
+                  >
                     <polyline points="16 18 22 12 16 6" />
                     <polyline points="8 6 2 12 8 18" />
                   </svg>
@@ -196,7 +286,10 @@
                 </div>
 
                 <div>
-                  <p>Leverage the platform for projects requiring advanced AI models.</p>
+                  <p>
+                    Leverage the platform for projects requiring advanced AI
+                    models.
+                  </p>
                 </div>
               </div>
             </div>
@@ -206,13 +299,16 @@
     </div>
     <div class="carousel-item h-full w-full">
       <section class="flex flex-col gap-8 w-full p-4 overflow-auto lg:p-20">
-        <h1 class="text-5xl font-black tracking-wide lg:text-7xl" style="font-family: 'Noto Serif';">
+        <h1
+          class="text-5xl font-black tracking-wide lg:text-7xl"
+          style="font-family: &quot;Noto Serif&quot;"
+        >
           Stay Connected
         </h1>
 
         <p class="text-xl">
-          Follow us on social media and stay updated. Subscribe for
-          news, tips, and exclusive offers!
+          Follow us on social media and stay updated. Subscribe for news, tips,
+          and exclusive offers!
         </p>
       </section>
     </div>

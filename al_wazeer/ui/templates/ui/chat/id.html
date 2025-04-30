@@ -1,49 +1,62 @@
-{% extends 'ui/chat/base.html' %}
+<!-- prettier ignore -->
+{% extends 'ui/chat/base.html' %}{% load i18n %}
 
-{% load i18n %}
-
+<!-- prettier ignore -->
 {% block title %} {{ block.super }} | {{ chat.title }}{% endblock %}
 
+<!-- prettier ignore -->
+{% block nav_styles %} hidden md:block{% endblock %}
+<!-- prettier ignore -->
 {% block sidebar_styles %} hidden lg:block{% endblock %}
+<!-- prettier ignore -->
 {% block content_styles %}{% endblock %}
 
+<!-- prettier ignore -->
 {% block content %}
 <section class="relative grid h-full w-full grid-rows-12 gap-4">
   <header class="absolute inset-x-0 top-0 z-10">
-    <nav class="navbar items-center justify-between gap-4 backdrop-blur-3xl rounded-t-box">
-      <div class="flex items-center gap-4">
-        <div class="tooltip tooltip-right" data-tip="{% translate 'Back' %}">
-          <a href="{% url 'al-wazeer:chats' %}" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-chevron-left">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-            <span class="sr-only">{% translate 'Back' %}</span>
-          </a>
-        </div>
-
-        <h1 class="flex items-center gap-2 text-lg font-semibold">
-          {% if chat.assistant.image %}
-          <img class="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" />
-          {% else %}
-          <div class="avatar avatar-placeholder">
-            <div class="w-10 rounded-full bg-primary text-primary-content">
-              <span class="text-xl">{{ chat.assistant.name|slice:'0:1' }}</span>
-            </div>
+    <nav
+      class="navbar items-center justify-between gap-4 backdrop-blur-3xl rounded-box"
+    >
+      <h1 class="flex items-center gap-2 text-lg font-semibold">
+        <!-- prettier ignore -->
+        {% if chat.assistant.image %}
+        <img
+          class="size-10 rounded-box"
+          src="https://img.daisyui.com/images/profile/demo/1@94.webp"
+        />
+        <!-- prettier ignore -->
+        {% else %}
+        <div class="avatar avatar-placeholder">
+          <div class="w-10 rounded-full bg-primary text-primary-content">
+            <span class="text-xl">{{ chat.assistant.name|slice:'0:1' }}</span>
           </div>
-          {% endif %}
+        </div>
+        <!-- prettier ignore -->
+        {% endif %}
 
-          <span>{{ chat.title }}</span>
-        </h1>
-      </div>
+        <span>{{ chat.title }}</span>
+      </h1>
 
       <div class="tooltip tooltip-left" data-tip="{% translate 'Options' %}">
-        <button type="button" class="btn btn-square btn-ghost" popovertarget="chta-details"
-          style="anchor-name:--chat-anchor">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-ellipsis-vertical">
+        <button
+          type="button"
+          class="btn btn-square btn-ghost"
+          popovertarget="options"
+          style="anchor-name: --options"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-ellipsis-vertical"
+          >
             <circle cx="12" cy="12" r="1" />
             <circle cx="12" cy="5" r="1" />
             <circle cx="12" cy="19" r="1" />
@@ -52,13 +65,29 @@
           <span class="sr-only">Options</span>
         </button>
 
-        <ul class="menu dropdown dropdown-left dropdown-bottom rounded-box backdrop-blur-3xl shadow-sm" popover
-          id="chta-details" style="position-anchor:--chat-anchor">
+        <ul
+          id="options"
+          popover
+          style="position-anchor: --options"
+          class="menu dropdown dropdown-left dropdown-bottom rounded-box backdrop-blur-3xl shadow-sm"
+        >
           <li>
-            <button onclick="detailsDialog.showModal()" class="flex items-center gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-info size-4">
+            <button
+              onclick="detailsDialog.showModal()"
+              class="flex items-center gap-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-info size-4 lg:size-5"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 16v-4" />
                 <path d="M12 8h.01" />
@@ -67,22 +96,47 @@
             </button>
           </li>
           <li>
-            <a href="{% url 'al-wazeer:update-chat' chat.id %}" class="flex items-center gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-pencil size-4">
+            <a
+              href="{% url 'al-wazeer:update-chat' chat.id %}"
+              class="flex items-center gap-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-pencil size-4 lg:size-5"
+              >
                 <path
-                  d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                  d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                />
                 <path d="m15 5 4 4" />
               </svg>
               Edit
             </a>
           </li>
           <li>
-            <button onclick="deleteDialog.showModal()" class="flex items-center gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-trash-2 size-4">
+            <button
+              onclick="deleteDialog.showModal()"
+              class="flex items-center gap-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-trash-2 size-4 lg:size-5"
+              >
                 <path d="M3 6h18" />
                 <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
                 <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -97,18 +151,23 @@
     </nav>
   </header>
 
-  <main class="row-span-12 flex h-full flex-col gap-4 overflow-y-auto py-24 lg:px-4">
+  <main
+    class="row-span-12 flex h-full flex-col gap-4 overflow-y-auto py-24 px-2 lg:px-4"
+  >
     <div id="messages" class="flex flex-col gap-4">
+      <!-- prettier ignore -->
       {% for message in chat.messages.all %}
+      <!-- prettier ignore -->
       {% if message.assistant %}
       <div class="chat-start chat">
         <div class="chat-header">
           {{ message.assistant }}
           <time class="text-xs opacity-50">{{ message.created_at }}</time>
         </div>
-        <div class="chat-bubble chat-bubble-accent">{{ message.content }}</div>
+        <div class="chat-bubble chat-bubble-neutral">{{ message.content }}</div>
         <div class="chat-footer opacity-50">Delivered</div>
       </div>
+      <!-- prettier ignore -->
       {% else %}
       <div class="chat-end chat">
         <div class="chat-header">
@@ -118,7 +177,9 @@
         <div class="chat-bubble chat-bubble-primary">{{ message.content }}</div>
         <div class="chat-footer opacity-50">Seen</div>
       </div>
+      <!-- prettier ignore -->
       {% endif %}
+      <!-- prettier ignore -->
       {% endfor %}
     </div>
 
@@ -130,25 +191,52 @@
   </main>
 
   <footer class="absolute inset-x-0 bottom-0 z-10">
-    <nav class="navbar items-center gap-2 backdrop-blur-3xl rounded-br-box">
+    <nav class="navbar items-center gap-2 backdrop-blur-3xl rounded-box">
       <label class="input w-full bg-transparent input-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-message-square-text size-5 opacity-50">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide size-4 lg:size-6 lucide-message-square-text size-5 opacity-50"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          />
           <path d="M13 8H7" />
           <path d="M17 12H7" />
         </svg>
-        <input id="chat-message-input" type="text" class="grow" placeholder="Message..." />
+        <input
+          id="chat-message-input"
+          type="text"
+          class="grow"
+          placeholder="Message..."
+        />
       </label>
 
-      <div id="retry-btn"
+      <div
+        id="retry-btn"
         class="{% if chat.messages.last.assistant is not None %}hidden {% endif %}tooltip tooltip-primary"
-        data-tip="Regenerate">
+        data-tip="Regenerate"
+      >
         <button type="button" class="btn btn-square btn-primary btn-soft">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-refresh-ccw-dot">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-refresh-ccw-dot"
+          >
             <path d="M3 2v6h6" />
             <path d="M21 12A9 9 0 0 0 6 5.3L3 8" />
             <path d="M21 22v-6h-6" />
@@ -159,12 +247,26 @@
       </div>
 
       <div class="tooltip tooltip-primary" data-tip="Send">
-        <button id="chat-message-submit" type="button" class="btn btn-square btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-send-horizontal">
+        <button
+          id="chat-message-submit"
+          type="button"
+          class="btn btn-square btn-primary"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-send-horizontal"
+          >
             <path
-              d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
+              d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"
+            />
             <path d="M6 12h16" />
           </svg>
         </button>
@@ -185,11 +287,24 @@
         <h1 class="text-2xl font-semibold">{{ chat.assistant }}</h1>
       </div>
 
-      <form method="dialog" class="tooltip tooltip-left" data-tip="{% translate 'Close' %}">
+      <form
+        method="dialog"
+        class="tooltip tooltip-left"
+        data-tip="{% translate 'Close' %}"
+      >
         <button type="submit" class="btn flex btn-square btn-ghost">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-x">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-x"
+          >
             <path d="M18 6 6 18" />
             <path d="m6 6 12 12" />
           </svg>
@@ -211,11 +326,24 @@
     <header class="flex items-center justify-between gap-4">
       <h1 class="text-2xl font-semibold">Delete {{ chat.title }}</h1>
 
-      <form method="dialog" class="tooltip tooltip-left" data-tip="{% translate 'Close' %}">
+      <form
+        method="dialog"
+        class="tooltip tooltip-left"
+        data-tip="{% translate 'Close' %}"
+      >
         <button type="submit" class="btn flex btn-square btn-ghost">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-x">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide size-4 lg:size-6 lucide-x"
+          >
             <path d="M18 6 6 18" />
             <path d="m6 6 12 12" />
           </svg>
@@ -226,19 +354,33 @@
     </header>
 
     <main class="grid gap-4">
-      <form id="delete-form" action="{% url 'al-wazeer:delete-chat' chat.id %}" method="post">
+      <form
+        id="delete-form"
+        action="{% url 'al-wazeer:delete-chat' chat.id %}"
+        method="post"
+      >
         {% csrf_token %}
 
         <p>{% translate 'Are you sure you want to delete this chat?' %}</p>
       </form>
 
       <div role="alert" class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-octagon-x">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide size-4 lg:size-6 lucide-octagon-x"
+        >
           <path d="m15 9-6 6" />
           <path
-            d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z" />
+            d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"
+          />
           <path d="m9 9 6 6" />
         </svg>
         <p>{% translate 'This action is irreversible!' %}</p>
@@ -247,9 +389,18 @@
 
     <footer class="modal-action">
       <button type="submit" form="delete-form" class="btn grow gap-4 btn-error">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-trash-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide size-4 lg:size-6 lucide-trash-2"
+        >
           <path d="M3 6h18" />
           <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
           <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -262,90 +413,101 @@
     </footer>
   </section>
 </dialog>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
-  const status = document.getElementById('target');
-  const loading = document.getElementById('loading');
-  const retryBtn = document.getElementById('retry-btn');
+  const status = document.getElementById("target");
+  const loading = document.getElementById("loading");
+  const retryBtn = document.getElementById("retry-btn");
 
-  document.querySelectorAll('#messages .chat-bubble .prose').forEach(element => {
-    element.innerHTML = element.innerText
-  });
+  document
+    .querySelectorAll("#messages .chat-bubble .prose")
+    .forEach((element) => {
+      element.innerHTML = element.innerText;
+    });
 
   const createChatBubble = (isAssistantMessage, content) => {
-    const container = document.createElement('div')
-    container.classList.add('chat')
-    const bubble = document.createElement('div')
-    bubble.classList.add('chat-bubble')
-    bubble.innerHTML = content
+    const container = document.createElement("div");
+    container.classList.add("chat");
+    const bubble = document.createElement("div");
+    bubble.classList.add("chat-bubble");
+    bubble.innerHTML = content;
 
     if (isAssistantMessage) {
-      container.classList.add('chat-start')
-      bubble.classList.add('chat-bubble-accent')
+      container.classList.add("chat-start");
+      bubble.classList.add("chat-bubble-accent");
     } else {
-      container.classList.add('chat-end')
-      bubble.classList.add('chat-bubble-primary')
+      container.classList.add("chat-end");
+      bubble.classList.add("chat-bubble-primary");
     }
 
+    container.appendChild(bubble);
 
-    container.appendChild(bubble)
+    return container;
+  };
 
-    return container
-  }
-
-  const socket = new WebSocket(`ws://${window.location.host}/ws/chats/{{ chat.id }}/`);
+  const socket = new WebSocket(
+    `wss://${window.location.host}/ws/chats/{{ chat.id }}/`,
+  );
 
   socket.onmessage = function (e) {
     const data = JSON.parse(e.data);
 
-    if (data.type === 'error') {
-      retryBtn.classList.remove('hidden')
-    } else { retryBtn.classList.add('hidden') }
-
-    if (data.generating) {
-      loading.classList.remove('hidden')
+    if (data.type === "error") {
+      retryBtn.classList.remove("hidden");
     } else {
-      loading.classList.add('hidden')
+      retryBtn.classList.add("hidden");
     }
 
-    document.getElementById('messages').appendChild(
-      createChatBubble(data.data.assistant, data.data.content)
-    )
+    if (data.generating) {
+      loading.classList.remove("hidden");
+    } else {
+      loading.classList.add("hidden");
+    }
+
+    document
+      .getElementById("messages")
+      .appendChild(createChatBubble(data.data.assistant, data.data.content));
   };
 
   socket.onclose = (e) => {
-    status.classList.remove('avatar-online')
-    status.classList.add('avatar-offline')
-    console.log('WebSocket closed with code:', event.code, 'reason:', event.reason);
+    status.classList.remove("avatar-online");
+    status.classList.add("avatar-offline");
+    console.log(
+      "WebSocket closed with code:",
+      event.code,
+      "reason:",
+      event.reason,
+    );
   };
 
   socket.onerror = (e) => {
-    status.classList.remove('avatar-online')
-    status.classList.add('avatar-offline')
-    console.error('WebSocket error:', error);
+    status.classList.remove("avatar-online");
+    status.classList.add("avatar-offline");
+    console.error("WebSocket error:", error);
   };
 
-  document.querySelector('#chat-message-input').focus();
+  document.querySelector("#chat-message-input").focus();
 
-  document.querySelector('#chat-message-input').onkeyup = (e) => {
-    if (e.keyCode === 13) {  // enter, return
-      document.querySelector('#chat-message-submit').click();
+  document.querySelector("#chat-message-input").onkeyup = (e) => {
+    if (e.keyCode === 13) {
+      // enter, return
+      document.querySelector("#chat-message-submit").click();
     }
   };
 
-  document.querySelector('#chat-message-submit').onclick = (e) => {
-    const messageInput = document.querySelector('#chat-message-input');
+  document.querySelector("#chat-message-submit").onclick = (e) => {
+    const messageInput = document.querySelector("#chat-message-input");
 
-    socket.send(JSON.stringify({ type: null, message: { content: messageInput.value } }));
+    socket.send(
+      JSON.stringify({ type: null, message: { content: messageInput.value } }),
+    );
 
-    messageInput.value = '';
+    messageInput.value = "";
   };
 
   retryBtn.onclick = (e) => {
-    loading.classList.remove('hidden')
-    socket.send(JSON.stringify({ type: 'retry' }))
-  }
+    loading.classList.remove("hidden");
+    socket.send(JSON.stringify({ type: "retry" }));
+  };
 </script>
 {% endblock %}

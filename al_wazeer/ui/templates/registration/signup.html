@@ -1,18 +1,25 @@
-{% extends "registration/base.html" %}
+<!-- prettier ignore -->
+{% extends "registration/base.html" %}{% load i18n %}
 
-{% load i18n %}
-
+<!-- prettier ignore -->
 {% block title %}{{ block.super }} | {% translate 'Sign up' %}{% endblock %}
 
+<!-- prettier ignore -->
 {% block main %}
-<section class="flex h-full w-full max-h-dvh overflow-y-auto items-center justify-center rounded-box bg-base-100">
-  <div class="card gap-4 mx-2 max-w-md card-body w-full rounded-box bg-base-200 mt-40 mb-20">
+<section
+  class="flex h-full w-full max-h-dvh overflow-y-auto items-center justify-center rounded-box bg-base-100"
+>
+  <div
+    class="card gap-4 mx-2 max-w-md card-body w-full rounded-box bg-base-200 mt-40 mb-20"
+  >
     <h1 class="text-3xl font-black">
-      {% translate 'Sign up' %} <span class="text-primary">{% translate 'Al-Wazeer' %}</span>
+      {% translate 'Sign up' %}
+      <span class="text-primary">{% translate 'Al-Wazeer' %}</span>
     </h1>
 
     <p>{% translate 'Welcome, please signup to continue.' %}</p>
 
+    <!-- prettier ignore -->
     {% include 'ui/components/form.html' %}
 
     <p>
